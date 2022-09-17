@@ -40,7 +40,7 @@
                         <th>Id</th>
                         <th>Nome</th>
                         <th>Email</th>
-                        <th>Permissão</th>
+                        <th>Perfil</th>
                         <th>Ações</th>
                     </tr>
               
