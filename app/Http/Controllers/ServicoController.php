@@ -15,7 +15,7 @@ class ServicoController extends Controller
     public function index()
     {
         $servicos=Servico::all();
-       return view('servicoIndex',['servicos'=>$servicos]);
+       return view('admin.servicos',['servicos'=>$servicos]);
     }
 
     /**
@@ -44,7 +44,7 @@ class ServicoController extends Controller
         $servicos=Servico::all();
         $sms='registado com sucesso';
 
-        return view('servicoIndex',['servicos'=>$servicos,'sms'=>$sms]);
+        return view('admin.servicos',['servicos'=>$servicos,'sms'=>$sms]);
     }
 
     /**

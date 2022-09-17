@@ -1,6 +1,6 @@
 @extends('layouts.template')
 
-@section('title', 'Usuários')
+@section('title', 'Serviços')
 
 
 @section('content')
@@ -27,7 +27,7 @@
         <div class="row mb-3">
             <div class="col-md-12">
                 <div class="overview-wrap">
-                    <h2 class="title-1">Usuários</h2>
+                    <h2 class="title-1">Serviços</h2>
                     <button class="au-btn au-btn-icon au-btn--blue" data-toggle="modal" data-target="#registarusuarioModal" >
                         <i class="zmdi zmdi-plus"></i>Registar</button>
                 </div>
@@ -38,24 +38,26 @@
             <thead class="table-dark">
                 <tr>
                         <th>Id</th>
-                        <th>Nome</th>
-                        <th>Email</th>
-                        <th>Perfil</th>
-                        <th>Ações</th>
+                        <th>Descrição</th>
+                        <th>Multa</th>
+                        <th>Acções</th>
                     </tr>
               
             </thead>
             <tbody>
-                @foreach ($users as $u)
+                @foreach($servicos as $s)
+
+                @php 
+                //formatando o valor que vem da BD no formato de dinheiro
+                $valor = number_format($s->multa, 2,",",".");
+
+                @endphp
                 <tr>
-                    <td>{{$u->id}}</td>
-                    <td>{{$u->name}}</td>
-                    <td>{{$u->email}}</td>
-                    <td>{{$u->permicao}}</td>
-                    
+                    <td>{{$s->id}}</td>
+                    <td>{{$s->descricao}}</td>
+                    <td>{{ $valor}}</td>
                     <td> 
                         <button class="btn btn-md btn-primary">Alterar</button>
-                        <button class="btn btn-md btn-secondary ">bloquear</button 
                     </td>
                    
 
@@ -74,7 +76,7 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="mediumModalLabel">Registar Usuário</h5>
+                <h5 class="modal-title" id="mediumModalLabel">Registar Serviços</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -89,58 +91,27 @@
 
                                     <div class="row">
                                         <div class="col-6">
-                                            <div class="form-group">
-                                                <label for="cc-exp" class="control-label mb-1">Nome</label>
-                                                <input id="cc-exp" name="name" type="text" class="form-control cc-exp" value="" required>
-                                                <span class="help-block" data-valmsg-for="cc-exp" data-valmsg-replace="true"></span>
-                                            </div>
-                                        </div>
-                                        <div class="col-6">
-                                            <label for="x_card_code" class="control-label mb-1">Email</label>
-                                            <div class="input-group">
-                                                <input id="x_card_code" name="email" type="email" class="form-control"  required>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="row">
-                                        <div class="col-6">
-                                            <div class="form-group">
-                                                <label for="cc-exp" class="control-label mb-1">Senha</label>
-                                                <input id="cc-exp" name="password" type="password" class="form-control cc-exp" value="" data-val="true" data-val-required="Please enter the card expiration"
-                                                    data-val-cc-exp="Please enter a valid month and year"
-                                                    autocomplete="cc-exp" required>
-                                                <span class="help-block" data-valmsg-for="cc-exp" data-valmsg-replace="true"></span>
-                                            </div>
-                                        </div>
-                                        <div class="col-6">
-                                            <label for="x_card_code" class="control-label mb-1">Confirmar Senha</label>
-                                            <div class="input-group">
-                                                <input id="x_card_code" name="password_confirmation" type="password" class="form-control cc-cvc" value="" data-val="true" data-val-required="Please enter the security code"
-                                                    data-val-cc-cvc="Please enter a valid security code" autocomplete="off" required>
-
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-12">
                                             <div class="row form-group">
                                                 <div class="col col-md-12">
-                                                    <label for="select" class=" form-control-label">Perfil</label>
+                                                    <label for="select" class=" form-control-label">Descrição</label>
                                                 </div>
                                                 <div class="col-12 col-md-12">
                                                     <select name="permission" id="select" class="form-control">
                                                         <option selected="selected">Selecione</option>
-                                                        <option value=Administrador">Administrador</option>
-                                                        <option value="operador">Operador</option>
+                                                        <option value="Monofásico">Monofásico</option>
+                                                        <option value="Trifásico">Trifásico</option>
                                                     </select>
                                                 </div>
                                             </div>
                                         </div>
-                                        
+                                        <div class="col-6">
+                                            <label for="multa" class="control-label mb-1">Multa</label>
+                                            <div class="input-group">
+                                                <input id="multa" name="email" type="text" class="form-control"  required>
+                                            </div>
+                                        </div>
                                     </div>
-
+                                    
                                     <div class="text-right">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                                         <button type="submit" class="btn btn-primary">Confirmar</button>
@@ -156,5 +127,15 @@
     </div>
 </div>
 <!-- end modal medium -->
+
+<script>
+    $(document).ready(function(){
+        //mascaras com jmask
+        $('#multa').mask('#.##0,00',{reverse: true});
+
+
+    });
+         
+</script>
 
 @endsection

@@ -1,6 +1,6 @@
 @extends('layouts.template')
 
-@section('title', 'Usuários')
+@section('title', 'Clientes')
 
 
 @section('content')
@@ -39,9 +39,9 @@
                 <tr>
                         <th>Id</th>
                         <th>Nome</th>
-                        <th>Email</th>
-                        <th>Perfil</th>
-                        <th>Ações</th>
+                        <th>Nif</th>
+                        <th>Morada</th>
+                        <th>Telefone</th>
                     </tr>
               
             </thead>

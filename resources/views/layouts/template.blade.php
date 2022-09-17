@@ -197,7 +197,7 @@
                                 <i class="fas fa-copy"></i>Servços</a>
                             <ul class="list-unstyled navbar__sub-list js-sub-list">
                                 <li>
-                                    <a href="login.html">Ver Todos</a>
+                                    <a href="{{url('/dashboard/servicos')}}">Ver Todos</a>
                                 </li>
                             </ul>
                         </li>
@@ -357,23 +357,23 @@
                                 <div class="account-wrap">
                                     <div class="account-item clearfix js-item-menu">
                                         <div class="image">
-                                            <img src="{{url('images/icon/avatar-01.jpg')}}" alt="John Doe" />
+                                            <img src="{{url('images/icon/avatar-01.jpg')}}" alt="user" />
                                         </div>
                                         <div class="content">
-                                            <a class="js-acc-btn" href="#">john doe</a>
+                                            <a class="js-acc-btn" href="#">{{ Auth::user()->name }}</a>
                                         </div>
                                         <div class="account-dropdown js-dropdown">
                                             <div class="info clearfix">
                                                 <div class="image">
                                                     <a href="#">
-                                                        <img src="images/icon/avatar-01.jpg" alt="John Doe" />
+                                                        <img src="{{url('images/icon/avatar-01.jpg')}}" alt="User" />
                                                     </a>
                                                 </div>
                                                 <div class="content">
                                                     <h5 class="name">
-                                                        <a href="#">john doe</a>
+                                                        <a href="#">{{ Auth::user()->name }}</a>
                                                     </h5>
-                                                    <span class="email">johndoe@example.com</span>
+                                                    <span class="email">{{ Auth::user()->email }}</span>
                                                 </div>
                                             </div>
                                             <div class="account-dropdown__body">
@@ -430,6 +430,7 @@
       <script src=" {{ url('assets/vendor/perfect-scrollbar/perfect-scrollbar.js')}}"></script>
       <script src="{{ url('assets/vendor/chartjs/Chart.bundle.min.js')}}"></script>
       <script src="{{ url('assets/vendor/select2/select2.min.js')}}"> </script>
+      <script type"text/javascript" src="{{url('js/jquery.mask.js')}}"></script>
       <!-- Main JS-->
       <script src="{{ url('js/main.js')}}"></script>
    <!--DATA TABLE-->

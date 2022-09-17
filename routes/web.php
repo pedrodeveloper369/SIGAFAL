@@ -25,11 +25,6 @@ Route::get('/', function () {
     return view('auth/login');
 });
 
-
-Route::get('/teste', function () {
-    return view('teste');
-});
-
 /*Route::get('/dashboard/user', function () {
     return view('user');
 });*/
