@@ -16,11 +16,13 @@ class CreateClientesTable extends Migration
         Schema::create('clientes', function (Blueprint $table) {
             $table->id();
             $table->string('nome');
-            $table->string('nif')->unique;
-            $table->string('morada');
-            $table->string('telefone')->unique;
-            $table->string('email');
+            $table->string('nif');
+            $table->string('telefone');
             $table->string('tipo');
+            $table->string('email');
+            $table->string('morada');
+            $table->bigInteger('servico_id')->unsigned();
+            $table->foreign('servico_id')->references('id')->on('servicos');
             $table->timestamps();
         });
     }
