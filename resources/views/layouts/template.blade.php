@@ -209,7 +209,7 @@
                                 <i class="fas fa-copy"></i>Pts</a>
                             <ul class="list-unstyled navbar__sub-list js-sub-list">
                                 <li>
-                                    <a href="login.html">Ver Todos</a>
+                                    <a href="{{url('/dashboard/pts')}}">Ver Todos</a>
                                 </li>
                             </ul>
                         </li>

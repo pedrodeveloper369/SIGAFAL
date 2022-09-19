@@ -23,6 +23,18 @@
 
                  @endif  
 
+                 @if(isset($sms))
+
+                <div class="sufee-alert alert with-close alert-success alert-dismissible fade show">
+                    <span class="badge badge-pill badge-success">Success</span>
+                    {{$sms}}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                @endif
+
 
         <div class="row mb-3">
             <div class="col-md-12">
@@ -132,7 +144,7 @@
                                                 <div class="col-12 col-md-12">
                                                     <select name="permission" id="select" class="form-control">
                                                         <option selected="selected">Selecione</option>
-                                                        <option value=Administrador">Administrador</option>
+                                                        <option value="Administrador">Administrador</option>
                                                         <option value="operador">Operador</option>
                                                     </select>
                                                 </div>

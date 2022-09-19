@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Pt as ModelsPt;
 use Illuminate\Http\Request;
-use App\Models\User;
-use App\Models\Models\ModelPermission;
-use Illuminate\Support\Facades\DB;
 
-class UserController extends Controller
+
+
+class Pt extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,19 +16,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        /*$users=User::all();
-        //
-       // $users=User::with('permission')->get();
-       // $users=User::with('permissions')->find(4);
-        return view('user',['users'=>$users]);*/
-        $users=DB::table('model_has_permissions')
-        ->join('permissions','permission_id','=','permissions.id')
-        ->join('users','model_id','=','users.id')
-        ->select('users.*', 'permissions.name as permicao')
-        ->get();
-        //return $exp;
-       
-        return view('admin.usuario',['users'=>$users]);
+        $pt=ModelsPt::all();
+       return view('admin.pts',['pt'=> $pt]);
     }
 
     /**
@@ -49,7 +38,13 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $pt=new ModelsPt();
+        $pt->localizacao=$request->localizacao;
+        $pt->save();
+        $pt=ModelsPt::all();
+        $sms="Registo efectuado com sucesso";
+        return view('admin.pts',['pt'=> $pt, 'sms'=>$sms]);
+        
     }
 
     /**
@@ -60,15 +55,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        $exp=DB::table('model_has_permissions')
-        ->join('permissions','permission_id','=','permissions.id')
-        ->join('user','model_id','=','users.id')
-        ->select('users.*', 'permissions.*')
-        ->get();
-        return $exp;
         //
-
-
     }
 
     /**

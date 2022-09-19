@@ -55,9 +55,12 @@ class RegisteredUserController extends Controller
        ->join('permissions','permission_id','=','permissions.id')
        ->join('users','model_id','=','users.id')
        ->select('users.*', 'permissions.name as permicao')
+       ->orderBy('users.id','asc')
        ->get();
        //return $exp;
-       return view('admin.usuario',['users'=>$users]);
+       $sms="Registo efectuado com sucesso";
+       return view('admin.usuario',['users'=>$users, 'sms'=>$sms]);
+       
 
        // return redirect(RouteServiceProvider::HOME);
     }
