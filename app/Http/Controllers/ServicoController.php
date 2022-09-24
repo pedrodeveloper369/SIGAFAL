@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Servico;
+use Illuminate\Database\QueryException;
 
 class ServicoController extends Controller
 {
@@ -55,7 +56,9 @@ class ServicoController extends Controller
      */
     public function show($id)
     {
-        //
+        $servicos=Servico::all();
+        $se=Servico::findOrfail($id);
+        return  view('admin.alterarservico',['servicos'=>$servicos,'se'=>$se]);
     }
 
     /**
@@ -78,7 +81,25 @@ class ServicoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $valor=$this->moeda($request->multa);
+        $s=['multa'=>$valor,'descricao'=>$request->descricao,'id'=>$request->id];
+      
+       /* $s->multa=$valor;
+        $s->descricao=$request->descricao;
+        $s->id=$request->id;
+        $request->multa=$valor;*/
+       // dd($request);
+        //dd($request->multa);
+        try{
+        Servico::findOrFail($request->id)->update($s);
+        $servicos=Servico::all();
+        $mensagem='registo alterado com sucesso';
+        }catch(QueryException $e){
+            $erro="Erro ao alterar";
+            $servicos=Servico::all();
+            return view('admin.alterarservico',['servicos'=>$servicos],['erro'=>$erro]);
+        }
+        return view('admin.alterarservico',['servicos'=>$servicos,'mensagem'=> $mensagem]);
     }
 
     /**
@@ -91,4 +112,12 @@ class ServicoController extends Controller
     {
         //
     }
+
+    public function moeda($v){
+		$source=array('.',',');
+		$replace=array('','.');
+		$valor=str_replace($source, $replace, $v);
+		return $valor;
+		
+	}
 }

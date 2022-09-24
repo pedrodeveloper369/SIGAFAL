@@ -9,4 +9,5 @@ class Servico extends Model
 {
     use HasFactory;
     protected $table='servicos';
+    protected $guarded=[];
 }

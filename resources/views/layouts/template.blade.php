@@ -186,7 +186,14 @@
                                 <i class="fas fa-copy"></i>Clientes</a>
                             <ul class="list-unstyled navbar__sub-list js-sub-list">
                                 <li>
-                                    <a href="login.html">Ver todos</a>
+                                    <a href="{{url('/dashboard/clientes')}}">Ver todos</a>
+                                </li>
+                                <li>
+                                    <a href="{{url('/dashboard/clientes')}}">Particulares</a>
+                                </li>
+
+                                <li>
+                                    <a href="{{url('/dashboard/clientesempresa')}}">Empresa</a>
                                 </li>
                             </ul>
                         </li>
@@ -194,7 +201,7 @@
 
                         <li class="has-sub">
                             <a class="js-arrow" href="#">
-                                <i class="fas fa-copy"></i>Servços</a>
+                                <i class="fas fa-copy"></i>Serviços</a>
                             <ul class="list-unstyled navbar__sub-list js-sub-list">
                                 <li>
                                     <a href="{{url('/dashboard/servicos')}}">Ver Todos</a>

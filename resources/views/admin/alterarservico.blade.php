@@ -20,8 +20,33 @@
                             </div>
                         @endforeach            
                     
+        @endif  
+        @if(isset($erro))
+              
+           <div class="sufee-alert alert with-close alert-danger alert-dismissible fade show">
+               <span class="badge badge-pill badge-danger">Erro</span>
+               {{$erro}} 
+               <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                   <span aria-hidden="true">&times;</span>
+               </button>
+           </div>
+               
+        @endif 
+                 @php
+              
+                 @endphp
 
-                 @endif  
+                 @if(isset($mensagem))
+
+                 <div class="sufee-alert alert with-close alert-success alert-dismissible fade show">
+                     <span class="badge badge-pill badge-success">Success</span>
+                     {{$mensagem}}
+                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                         <span aria-hidden="true">&times;</span>
+                     </button>
+                 </div>
+ 
+                 @endif
 
 
         <div class="row mb-3">
@@ -57,7 +82,7 @@
                     <td>{{$s->descricao}}</td>
                     <td>{{$valor}}</td>
                     <td> 
-                        <button class="btn btn-md btn-outline-primary editar" id="{{$s->id}}">
+                        <button class="btn btn-md btn-outline-primary  editar" id="{{$s->id}}">
                             <a class="bnEditar" href="{{url("/dashboard/servicos/show/$s->id")}}">Alterar</a>
                         </button>
                     </td>
@@ -140,7 +165,7 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="mediumModalLabel">Registar Serviços</h5>
+                <h5 class="modal-title" id="mediumModalLabel">Alterar Serviços</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -150,8 +175,9 @@
                     <div class="col-lg-12">
                         <div class="card">
                             <div class="card-body">
-                                <form action="{{url('/user/registar')}}" method="Post" novalidate="novalidate">
-                                    @csrf
+                                <form action="{{url("/servicos/update/$se->id")}}" method="Post" novalidate="novalidate">
+                                    {{csrf_field()}}
+                                    {{ method_field('PUT') }}
 
                                     <div class="row">
                                         <div class="col-6">
@@ -160,8 +186,8 @@
                                                     <label for="select" class=" form-control-label">Descrição</label>
                                                 </div>
                                                 <div class="col-12 col-md-12">
-                                                    <select name="permission" id="select" class="form-control">
-                                                        <option selected="selected">{{$s->descricao}}</option>
+                                                    <select name="descricao" id="select" class="form-control">
+                                                        <option selected="{{$se->descricao}}">{{$se->descricao}}</option>
                                                         <option value="Monofásico">Monofásico</option>
                                                         <option value="Trifásico">Trifásico</option>
                                                     </select>
@@ -171,7 +197,8 @@
                                         <div class="col-6">
                                             <label for="multa" class="control-label mb-1">Multa</label>
                                             <div class="input-group">
-                                                <input id="multa" name="email" value="{{$s->multa}}" type="text" class="form-control"  required>
+                                                <input id="altmulta" name="multa" value="{{$se->multa}}" type="text" class="form-control"  required>
+                                                <input  name="id" value="{{$se->id}}" type="hidden">
                                             </div>
                                         </div>
                                     </div>
@@ -195,10 +222,12 @@
 <script>
     $(document).ready(function(){
         //mascaras com jmask
-        $('#multa').mask('#.##0,00',{reverse: true});
+        $('#altmulta').mask('#.##0,00',{reverse: true});
 
-
+        $('#alterarServicoModal').modal('show');
     });
+
+    
 
     
     $(document).on('click','.editar',function(){

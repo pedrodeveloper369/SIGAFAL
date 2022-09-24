@@ -46,10 +46,11 @@
               
             </thead>
             <tbody>
-                @foreach ($users as $u)
+                @if(isset($cliente))
+                    @foreach($cliente as $c)
                 <tr>
-                    <td>{{$u->id}}</td>
-                    <td>{{$u->name}}</td>
+                    <td></td>
+                    <td></td>
                     <td>{{$u->email}}</td>
                     <td>{{$u->permicao}}</td>
                     
@@ -57,10 +58,11 @@
                         <button class="btn btn-md btn-primary">Alterar</button>
                         <button class="btn btn-md btn-secondary ">bloquear</button 
                     </td>
+                    @endforeach
                    
-
+                @endif    
                 </tr>
-                @endforeach
+               
             </tbody>
           </table>
     </div>

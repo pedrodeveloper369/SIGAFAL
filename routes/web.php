@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ClienteController;
+use App\Http\Controllers\ClientesController;
 use App\Http\Controllers\Pt;
 use App\Http\Controllers\ServicoController;
 use Illuminate\Support\Facades\Route;
@@ -57,9 +58,13 @@ Route::post('/dashboard/clientes', [ClienteController::class,'store']);
 
 //Rotas servicos
 Route::get('/dashboard/servicos', [ServicoController::class,'index']);
-
+Route::get('/dashboard/servicos/show/{id}', [ServicoController::class,'show']);
 Route::post('/dashboard/servicos', [ServicoController::class,'store']);
-
+Route::put('/servicos/update/{id}', [ServicoController::class,'update']);
 //Rotas pts
 Route::get('/dashboard/pts', [Pt::class,'index']);
 Route::post('/dashboard/Pts/store', [Pt::class,'store']);
+//clientes
+Route::get('/dashboard/clientes', [ClientesController::class,'index']);
+Route::post('/dashboard/clientes/store', [ClientesController::class,'store']);
+Route::get('/dashboard/clientesempresa', [ClientesController::class,'showEmpresa']);
