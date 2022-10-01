@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Models\ModelPermission;
 use Illuminate\Support\Facades\DB;
 
+
 class UserController extends Controller
 {
     /**
@@ -94,12 +95,27 @@ class UserController extends Controller
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    public function bloquear(Request $request)
+    {
+       // dd($request->usuario_id);
+        $user = User::findOrFail($request->usuario_id);
+        
+        $user->estado = 'inativo';
+        $user->update();
+
+        return redirect()->back()->with('sms', 'Usuário Bloqueado');
+              
+    }
+
+    public function desbloquear(Request $request)
+    {
+        $user = User::findOrFail($request->usuario_id);
+        $user->estado = 'ativo';
+        $user->update();
+        return redirect()->back()->with('sms', 'Usuário Desbloqueado');
+              
+    }
+
     public function destroy($id)
     {
         //

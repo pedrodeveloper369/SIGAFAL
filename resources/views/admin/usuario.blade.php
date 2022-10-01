@@ -35,6 +35,15 @@
 
                 @endif
 
+                @if (session()->has('sms'))
+                    <div class="sufee-alert alert with-close alert-success alert-dismissible fade show">
+                        <span class="badge badge-pill badge-success">Success</span>
+                        {{session()->get('sms')}}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                @endif
 
         <div class="row mb-3">
             <div class="col-md-12">
@@ -52,34 +61,49 @@
                         <th>Id</th>
                         <th>Nome</th>
                         <th>Email</th>
+                        <th>Estado</th>
                         <th>Perfil</th>
                         <th>Ações</th>
                     </tr>
               
             </thead>
             <tbody>
+                @if(isset($users))
                 @foreach ($users as $u)
                 <tr>
                     <td>{{$u->id}}</td>
                     <td>{{$u->name}}</td>
                     <td>{{$u->email}}</td>
+                    <td>{{$u->estado}}</td>
                     <td>{{$u->permicao}}</td>
                     
+
                     <td> 
                         <button class="btn btn-md btn-primary">Alterar</button>
-                        <button class="btn btn-md btn-secondary ">bloquear</button 
+                        @if ($u->estado=='inativo')
+                            <button id ="{{$u->id}}"  onclick="retornaid2({{$u->id}});" class="btn btn-md btn-secondary bloquear_desbloquear" data-toggle="modal" data-target="#smallmodal2" >
+                                Desbloquear
+                            </button>
+                            @else:
+
+                            <button id ="{{$u->id}}"  onclick="retornaid({{$u->id}});" class="btn btn-md btn-secondary bloquear_desbloquear" data-toggle="modal" data-target="#smallmodal" >
+                                Bloquear
+                            </button>
+
+                            
+                        @endif
+                        
+                    
                     </td>
                    
 
                 </tr>
                 @endforeach
+                @endif
             </tbody>
           </table>
     </div>
 </div>
-
-
-
 
 <!-- modal registar usuario -->
 <div class="modal fade" id="registarusuarioModal" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true">
@@ -169,4 +193,79 @@
 </div>
 <!-- end modal medium -->
 
+<!--modal desbloquear-->
+<div class="modal fade" id="smallmodal2" tabindex="-1" role="dialog" aria-labelledby="smallmodalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-danger" id="smallmodalLabel">Atenção</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p class="mb-3">
+                    Tem certeza que deseja Desbloquear este usuário?
+                </p>
+                <form action="{{url('/user/desbloquear')}}" method="post">
+                    @csrf
+                   
+                    <input type="hidden" value="" name="usuario_id" id="usuario_id_desboquear">
+                    <div class="float-right">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Não</button>
+                        <button type="submit" class="btn btn-primary">Sim</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- modal bloquear usuario -->
+<div class="modal fade" id="smallmodal" tabindex="-1" role="dialog" aria-labelledby="smallmodalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-danger" id="smallmodalLabel">Atenção</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p class="mb-3">
+                    Tem certeza que deseja bloquear este usuário?
+                </p>
+                <form action="{{url('/user/bloquear')}}" method="post">
+                    @csrf
+                    
+                    <input type="hidden" value="" name="usuario_id" id="usuario_id">
+                    <div class="float-right">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Não</button>
+                        <button type="submit" class="btn btn-primary">Sim</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end modal small -->
+
+
+<script>
+    function retornaid(id){
+        $('#usuario_id').val(id);
+    }
+
+    function retornaid2(id){
+        $('#usuario_id_desboquear').val(id);
+    }
+    
+
+    $(document).ready(function(){
+        
+       
+            
+    });
+      
+    </script>
 @endsection

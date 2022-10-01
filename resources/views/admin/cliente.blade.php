@@ -153,7 +153,7 @@
                                         <div class="col-6">
                                             <label for="telefone" class="control-label mb-1">Telefone</label>
                                             <div class="input-group">
-                                                <input id="telefone" name="telefone" type="text" class="form-control"  required>
+                                                <input id="telefone" name="telefone" type="tel" class="form-control"  required>
                                             </div>
                                         </div>
                                     </div>
@@ -163,7 +163,7 @@
                                         <div class="col-6">
                                             <label for="email" class="control-label mb-1">Email</label>
                                             <div class="input-group">
-                                                <input id=email" name="email" type="text" class="form-control"  required>
+                                                <input id="email" name="email" type="text" class="form-control"  required>
                                             </div>
                                         </div>
 

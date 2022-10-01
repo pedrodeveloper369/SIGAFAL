@@ -225,7 +225,7 @@
                                 <i class="fas fa-desktop"></i>Pagamentos</a>
                             <ul class="list-unstyled navbar__sub-list js-sub-list">
                                 <li>
-                                    <a href="button.html">Ver Todos</a>
+                                    <a href="{{url('/dashboard/pagamentos')}}">Ver Todos</a>
  
                             </ul>
                         </li>

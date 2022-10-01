@@ -7,6 +7,10 @@ use App\Http\Requests\Auth\LoginRequest;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\User;
+use Illuminate\Validation\ValidationException;
+
+
 
 class AuthenticatedSessionController extends Controller
 {
@@ -28,10 +32,20 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request)
     {
+        
+        $user = User::where('email',$request->email)->first();
+       
+        if($user->estado != 'ativo'){
+            throw ValidationException::withMessages([
+                'email' => trans('De momento estás inativo, contacte o administrador'),
+            ]); 
+            return redirect()->back();
+        }
+
         $request->authenticate();
 
         $request->session()->regenerate();
-
+       
         return redirect()->intended(RouteServiceProvider::HOME);
     }
 

@@ -88,7 +88,7 @@
                     <div class="col-lg-12">
                         <div class="card">
                             <div class="card-body">
-                                <form action="{{url('/user/registar')}}" method="Post" novalidate="novalidate">
+                                <form action="{{url('/dashboard/servicos')}}" method="Post" novalidate="novalidate">
                                     @csrf
 
                                     <div class="row">
@@ -98,7 +98,7 @@
                                                     <label for="select" class=" form-control-label">Descrição</label>
                                                 </div>
                                                 <div class="col-12 col-md-12">
-                                                    <select name="permission" id="select" class="form-control">
+                                                    <select name="descricao" id="select" class="form-control">
                                                         <option selected="selected">Selecione</option>
                                                         <option value="Monofásico">Monofásico</option>
                                                         <option value="Trifásico">Trifásico</option>
@@ -109,7 +109,7 @@
                                         <div class="col-6">
                                             <label for="multa" class="control-label mb-1">Multa</label>
                                             <div class="input-group">
-                                                <input id="multa" name="email" type="text" class="form-control"  required>
+                                                <input id="multa" name="multa" type="text" class="form-control"  required>
                                             </div>
                                         </div>
                                     </div>

@@ -6,6 +6,7 @@ use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\ClientesController;
 use App\Http\Controllers\Pt;
 use App\Http\Controllers\ServicoController;
+use App\Http\Controllers\PagamentoController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -49,6 +50,11 @@ require __DIR__.'/auth.php';
 
 Route::post('/user/registar',[RegisteredUserController::class,'store'])->middleware('auth');
 
+//rotas usuario
+Route::post('/user/bloquear',[UserController::class,'bloquear'])->middleware('auth');
+Route::post('/user/desbloquear',[UserController::class,'desbloquear'])->middleware('auth');
+
+
 //Rotas clientes
 Route::get('/dashboard/clientes', [ClienteController::class,'index']);
 Route::get('/dashboard/clientes.register', function () {
@@ -67,4 +73,9 @@ Route::post('/dashboard/Pts/store', [Pt::class,'store']);
 //clientes
 Route::get('/dashboard/clientes', [ClientesController::class,'index']);
 Route::post('/dashboard/clientes/store', [ClientesController::class,'store']);
-Route::get('/dashboard/clientesempresa', [ClientesController::class,'showEmpresa']);
+Route::get('/dashboard/clientesempresa', [ClientesController::class,'showEmpresa']); 
+
+//pagamentos
+Route::get('/dashboard/pagamentos', [PagamentoController::class,'index']);
+Route::post('/dashboard/pagamentos/buscarCliente', [PagamentoController::class,'buscarCliente']); 
+Route::post('/dashboard/pagamento', [PagamentoController::class,'pagamento']);
