@@ -90,7 +90,7 @@
             @if(isset($pagamento))
                   @foreach($pagamento as $pag)
                 <tr>
-                    <td>{{ $c->id}}</td>
+                    
                 </tr>
                 @endforeach
                    

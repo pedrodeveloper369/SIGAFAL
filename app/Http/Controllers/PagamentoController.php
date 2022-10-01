@@ -7,7 +7,9 @@ use App\Models\Pagamento;
 use App\Models\Cliente;
 use App\Models\Servico;
 use App\Models\Pt;
-use Illuminate\Support\Facades\DB;
+use App\Models\ClientePagamento;
+use Illuminate\Support\Facades\DB; 
+use Illuminate\Support\Facades\Auth;
 
     session_start();
 
@@ -56,4 +58,74 @@ class PagamentoController extends Controller
             'qtd' => $_SESSION['qtd']
        ]);
     }
+
+
+    public function retornaMes($mes){
+        switch ($mes){
+            case "01":
+                return "Janeiro";
+            
+            case "02":
+                return "Fevereiro";
+            case "03":
+                return "Março";
+                
+            case "04":
+                return "Abril";
+            case "05":
+                return "Maio";
+                    
+            case "06":
+                return "Junho";
+            case "07":
+                    return "Julho";
+                
+            case "08":
+                return "Agosto";
+            case "09":
+                return "Setembro";
+                    
+            case "10":
+                return "Outubro";
+            case "11":
+                return "Novembro";
+                       
+            case "12":
+                return "Dezembro";
+        }
+    }
+
+
+    public function store(Request $request){
+        $p=new Pagamento();
+       
+        $p->modopagamento=$_SESSION['modo'];
+        $p->nomebanco=$_SESSION['banco'];
+        $p->id_docpagamento=$_SESSION['id_documento'];
+        $p->estado='não verficicado';
+        $p->qtd= $_SESSION['qtd'];
+        $p->user_id=Auth::user()->id;
+        $p->valortotal = 233;
+        $p->datapagamento = date('y-m-d');
+        $p->save();
+
+        $qtd=$p->qtd;
+        
+        for($i=0; $i<$qtd; $i++){
+            $c=new ClientePagamento();
+            $cont=$i+1;
+            $ano= explode('-', $request["data".$cont]);
+            $c->ano = $ano[0];
+            $c->mes = $this->retornaMes($ano[1]);
+            $c->cliente_id = $_SESSION['id_cliente'];
+            $c->pagamento_id = $p->id;
+            $c->preco =$request["preco".$cont];
+            $c->save();
+
+        }
+
+        dd("feito");
+    }
+
+    
 }

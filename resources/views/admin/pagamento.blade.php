@@ -144,16 +144,7 @@
                                     <input id="id_documento" name="id_documento" type="text" class="form-control"  required>
                                 </div>
                             </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <div class="col-12">
-                                <label for="preco" class="control-label mb-1">Valor</label>
-                                <div class="input-group">
-                                    <input id="valor_total" name="valor_total" type="number" min="1" class="form-control"  required>
-                                </div>
-                            </div>
-                        </div>
+                        </div><br>
 
                         
                         <div class="">

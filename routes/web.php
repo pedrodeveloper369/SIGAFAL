@@ -79,3 +79,4 @@ Route::get('/dashboard/clientesempresa', [ClientesController::class,'showEmpresa
 Route::get('/dashboard/pagamentos', [PagamentoController::class,'index']);
 Route::post('/dashboard/pagamentos/buscarCliente', [PagamentoController::class,'buscarCliente']); 
 Route::post('/dashboard/pagamento', [PagamentoController::class,'pagamento']);
+Route::post('/dashboard/pagamento/store', [PagamentoController::class,'store']);

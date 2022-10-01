@@ -52,7 +52,7 @@
         <div class="row mb-3">
             <div class="col-md-12">
                 <div class="overview-wrap">
-                    <h2 class="title-1">Pagamento</h2>
+                    <h2 class="title-1"></h2>
                 </div>
             </div>
         </div>
@@ -66,7 +66,7 @@
                    <h4 class="title-3">Dados para o Pagamento</h4><hr>
                    
                    
-                    <form action="" method="Post" novalidate="novalidate">
+                    <form action="{{url('/dashboard/pagamento/store')}}" method="Post" novalidate="novalidate">
                         @csrf
                     
                         @for ($i=0; $i<$qtd; $i++)
@@ -93,13 +93,19 @@
                                  </div>
                             </div>
 
-                            <div class="col-12">
+                            <div class="col-6">
                                 <label for="banco" class="control-label mb-1">Multa</label>
                                 <select name="multa{{$i+1}}" id="multa{{$i+1}}" class="form-control">
                                     <option selected="selected">Selecione</option>
                                     <option value="com multa">Com Multa</option>
                                     <option value="sem multa">Sem Multa</option>
                                 </select>
+                            </div>
+
+                            <div class="col-6" id="valor_multa">
+                                <label for="banco" class="control-label mb-1">Valor da Multa</label>
+                                <input id="valor_multa{{$i+1}}" name="valor_multa{{$i+1}}" type="number" min="0" class="form-control"  required>
+                                 
                             </div>
 
                             
@@ -124,5 +130,7 @@
         </div>
     </div>
 </div>
+
+
 
 @endsection
